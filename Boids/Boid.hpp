@@ -14,7 +14,7 @@ class Boid
 private:
 
 public:
-	Vector2D speed;
+	Vector2D velocity;
 	Vector2D position;
 	sf::CircleShape shape;
 

@@ -2,6 +2,8 @@
 
 int main()
 {
-    Display disp(100);
-    disp.main_loop();
+    // create a display and spawn a number of boids
+    Display display(100);
+    // run the mainloop
+    display.mainloop();
 }

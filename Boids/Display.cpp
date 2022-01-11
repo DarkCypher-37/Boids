@@ -56,7 +56,7 @@ void Display::draw()
 	window.display();
 }
 
-void Display::main_loop() {
+void Display::mainloop() {
 	
 	while (window.isOpen()) { // run the mainloop as long as the window is open
 		//update loop

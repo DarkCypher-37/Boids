@@ -26,7 +26,7 @@ public:
 	Display();
 	Display(int amount);
 
-	void main_loop();
+	void mainloop();
 	void draw();
 };
 
