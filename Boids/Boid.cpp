@@ -30,7 +30,7 @@ void keep_in_bounds(Vector2D position, Vector2D velocity, float width, float hei
 Boid::Boid() {
     // constructor of a Boid with no arguments
     position = Vector2D(50.f, 50.f);
-    // shape.setPointCount(3); // lowering the resolution of the circle so much, that it becomes a triangle
+    shape.setPointCount(3); // lowering the resolution of the circle so much, that it becomes a triangle
     shape.setRadius(8.0f); // setting the readius of the circle
     shape.setFillColor(sf::Color(255, 0, 0)); // colering the 'circles' red
     shape.setPosition(position.x, position.y); // giving the CircleShape an position equal to the Boid position
@@ -41,8 +41,18 @@ Boid::Boid(float _x, float _y) {
     position = Vector2D(_x, _y);
     //shape.setPointCount(3); // lowering the resolution of the circle so much, that it becomes a triangle
     velocity = Vector2D(rand() % 50 -25, rand() % 50 - 25); // randomizing the velocity of the Boid to make it more FUUUNNN!!!
-    shape.setRadius(8.0f); // setting the readius of the circle
+    shape.setRadius(3.0f); // setting the readius of the circle
     shape.setFillColor(sf::Color(0, 255, 0)); // colering the 'circles' green
+    shape.setPosition(position.x, position.y); // giving the CircleShape an position equal to the Boid position
+}
+
+Boid::Boid(float _x, float _y, sf::Color color) {
+    // constructor with arguments for the postion
+    position = Vector2D(_x, _y);
+    //shape.setPointCount(3); // lowering the resolution of the circle so much, that it becomes a triangle
+    velocity = Vector2D(rand() % 50 - 25, rand() % 50 - 25); // randomizing the velocity of the Boid to make it more FUUUNNN!!!
+    shape.setRadius(3.0f); // setting the readius of the circle
+    shape.setFillColor(color); // colering the 'circles' green
     shape.setPosition(position.x, position.y); // giving the CircleShape an position equal to the Boid position
 }
 
@@ -61,7 +71,7 @@ void Boid::update_position(int width, int height) {
 }
 
 
-void Boid::update_movement(std::vector<Boid>& boids) {
+void Boid::update_movement(std::vector<Boid>& boids, float seperationWeight, float alignmentWeight, float cohesionWeight) {
     // funciton to update the movement
     int count = 0;
     float viewrange = 100.f;
@@ -104,7 +114,7 @@ void Boid::update_movement(std::vector<Boid>& boids) {
         seperation.nomalize();
 
         // adding the vectors to velocity, adjust the floats for diffrent flocking behaviours
-        velocity += alignment*1.f + cohesion*1.f + seperation*1.f;
+        velocity += alignment*alignmentWeight + cohesion*cohesionWeight + seperation*seperationWeight;
 
         // normalizing the speedvector
         velocity.nomalize();

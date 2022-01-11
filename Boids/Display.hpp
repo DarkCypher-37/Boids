@@ -8,15 +8,26 @@
 #include "Vector2D.hpp"
 
 // declare Boid to avoid inlcude loops
-class Boid;
+
 
 class Display {
 	private:
 		int width;
 		int height;
 
+		float seperationWeight;
+		float alignmentWeight;
+		float cohesionWeight;
+
 		// window to render on the screen
 		sf::RenderWindow window;
+
+		// boxes to adjust the values
+		sf::RectangleShape box_seperation;
+		sf::RectangleShape box_alignment;
+		sf::RectangleShape box_cohesion;
+
+		sf::Text seperation_text;
 
 	public:
 		// vector containing all the boids

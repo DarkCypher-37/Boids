@@ -8,7 +8,6 @@
 #include "Vector2D.hpp"
 
 // deklare Vecor2D to avoid an include loop
-class Vector2D;
 
 class Boid {
 	private:
@@ -23,9 +22,10 @@ class Boid {
 		// constructors
 		Boid();
 		Boid(float _x, float _y);
+		Boid(float _x, float _y, sf::Color color);
 
 		// update_movement movement
-		void update_movement(std::vector<Boid>& boids);
+		void update_movement(std::vector<Boid>& boids, float seperationWeight, float alignmentWeight, float cohesionWeight);
 		// update_position
 		void update_position(int width, int height);
 };
