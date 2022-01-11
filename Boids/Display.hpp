@@ -2,12 +2,10 @@
 #define __DISPLAY_HPP__
 
 #include <SFML/Graphics.hpp>
-
-#include <iostream>
-#include <vector> 
-
+#include <vector>
 
 #include "Boid.hpp"
+#include "Vector2D.hpp"
 
 class Boid;
 

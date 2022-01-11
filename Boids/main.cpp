@@ -1,9 +1,3 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <sstream>
-#include <typeinfo>
-
 #include "Display.hpp"
 
 int main()

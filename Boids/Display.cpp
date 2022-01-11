@@ -1,13 +1,4 @@
 #include "Display.hpp"
-#include "Boid.hpp"
-#include "Vector2D.hpp"
-#include <iostream>
-
-
-#include <vector>
-
-
-
 
 Display::Display()
 {
@@ -19,7 +10,7 @@ Display::Display()
 	window.create(sf::VideoMode(width, height, Desktop.bitsPerPixel), "Boids", sf::Style::None);
 	window.setFramerateLimit(60);
 	for (int i = 0; i < amount; i++) {
-		boids.push_back(Boid(rand() % width, rand() % height)); //set Position random in a range from 0 to 99
+		boids.push_back(Boid(rand() % width, rand() % height));
 	}
 }
 
@@ -33,7 +24,7 @@ Display::Display(int _amount)
 	window.create(sf::VideoMode(width, height, Desktop.bitsPerPixel), "Boids", sf::Style::None);
 	window.setFramerateLimit(60);
 	for (int i = 0; i < amount; i++) {
-		boids.push_back(std::move(Boid(rand() % width, rand() % height))); //set Position random in a range from 0 to 99
+		boids.push_back(std::move(Boid(rand() % width, rand() % height)));
 	}
 }
 

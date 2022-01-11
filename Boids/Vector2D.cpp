@@ -15,7 +15,7 @@ Vector2D::Vector2D(float _x, float _y)
 
 float Vector2D::distance(Vector2D& v)
 {
-	return sqrt(x - v.x + y - v.y);
+	return sqrt((x - v.x) * (x - v.x) + (y - v.y) * (y - v.y));
 }
 
 float Vector2D::magnitude()
@@ -118,11 +118,6 @@ void Vector2D::operator+=(const Vector2D& v)
 	y += v.y;
 }
 
-void Vector2D::operator+=(sf::Vector2f& v)
-{
-	this->x += v.x;
-	this->y += v.y;
-}
 
 Vector2D Vector2D::operator-()
 {
