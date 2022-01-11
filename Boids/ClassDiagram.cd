@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Boid">
-    <Position X="8" Y="4.75" Width="3" />
+    <Position X="8" Y="4.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAACCAAAAAAIAAAAAAAQQAAAAAAEAEFAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAACCAAAAAIAAAAAAAAAAAAAQAAAAEBAA=</HashCode>
       <FileName>Boid.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Display">
     <Position X="8" Y="1.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAAAAQAQAIAAQEAAAAAgAAIAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAAQAQAIAAQEAAAAAAAAIAAAAAAAAAAA=</HashCode>
       <FileName>Display.hpp</FileName>
     </TypeIdentifier>
   </Class>

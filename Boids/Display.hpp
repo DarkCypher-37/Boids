@@ -14,7 +14,6 @@ class Display {
 	private:
 		int width;
 		int height;
-		int quantity;
 
 		// window to render on the screen
 		sf::RenderWindow window;

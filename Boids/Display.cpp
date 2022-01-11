@@ -7,7 +7,7 @@ Display::Display() {
 	height = desktop.height;
 
 	// set the quantity of boids
-	quantity = 30;
+	int quantity = 30;
 
 	// create the window
 	window.create(sf::VideoMode(width, height, desktop.bitsPerPixel), "Boids", sf::Style::None);
@@ -19,14 +19,11 @@ Display::Display() {
 	}
 }
 
-Display::Display(int _quantity) {
+Display::Display(int quantity) {
 	// getting the width and height of the screen
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	width = floor(desktop.width/1);
 	height = floor(desktop.height/1);
-
-	// set the quantity of boids
-	quantity = _quantity;
 
 	// create the window
 	window.create(sf::VideoMode(width, height, desktop.bitsPerPixel), "Boids", sf::Style::None);
@@ -44,7 +41,7 @@ void Display::draw() {
 	window.clear(sf::Color::Black);
 
 	// DRAW
-	for (int i = 0; i < quantity; i++) {
+	for (size_t i = 0; i < boids.size(); i++) {
 		// draw every boid
 		window.draw(boids[i].shape);
 	}
@@ -67,7 +64,7 @@ void Display::mainloop() {
 		}
 
 		// update the position and movement of each boid
-		for (int i = 0; i < boids.size(); i++) {
+		for (size_t i = 0; i < boids.size(); i++) {
 			boids[i].update_movement(boids); // update the movement
 			boids[i].update_position(width, height); // update the position
 		}
