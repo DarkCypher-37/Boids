@@ -7,23 +7,26 @@
 
 #include "Vector2D.hpp"
 
+// deklare Vecor2D to avoid an include loop
 class Vector2D;
 
-class Boid
-{
-private:
+class Boid {
+	private:
+		// velocity and position attributes
+		Vector2D velocity;
+		Vector2D position;
 
-public:
-	Vector2D velocity;
-	Vector2D position;
-	sf::CircleShape shape;
+	public:
+		sf::CircleShape shape;
+		// the CicleShape can be drawn on the window
+		// 
+		// constructors
+		Boid();
+		Boid(float _x, float _y);
 
-public:
-	Boid();
-	Boid(float _x, float _y);
-
-	void update(std::vector<Boid>& boids);
-	void move(int width, int height);
+		// update_movement movement
+		void update_movement(std::vector<Boid>& boids);
+		// update_position
+		void update_position(int width, int height);
 };
-
 #endif

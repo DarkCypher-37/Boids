@@ -46,7 +46,7 @@ Boid::Boid(float _x, float _y) {
     shape.setPosition(position.x, position.y); // giving the CircleShape an position equal to the Boid position
 }
 
-void Boid::move(int width, int height) {
+void Boid::update_position(int width, int height) {
     // method for updating the postion of the boid
 
     // adding the velocity to the postion for movement and using the method wrap() to keep the Boids on screen
@@ -61,7 +61,8 @@ void Boid::move(int width, int height) {
 }
 
 
-void Boid::update(std::vector<Boid>& boids) {
+void Boid::update_movement(std::vector<Boid>& boids) {
+    // funciton to update the movement
     int count = 0;
     float viewrange = 100.f;
 

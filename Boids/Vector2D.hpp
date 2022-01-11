@@ -62,5 +62,4 @@ class Vector2D{
 		void operator *=(const Vector2D& v);
 		void operator /=(const Vector2D& v);
 };
-
 #endif

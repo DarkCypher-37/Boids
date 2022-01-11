@@ -7,27 +7,27 @@
 #include "Boid.hpp"
 #include "Vector2D.hpp"
 
+// declare Boid to avoid inlcude loops
 class Boid;
 
+class Display {
+	private:
+		int width;
+		int height;
+		int quantity;
 
-class Display
-{
-private:
-	int width;
-	int height;
+		// window to render on the screen
+		sf::RenderWindow window;
 
-public:
-	int amount;
+	public:
+		// vector containing all the boids
+		std::vector<Boid> boids;
 
-	sf::RenderWindow window;
-	sf::VideoMode Desktop = sf::VideoMode::getDesktopMode();
-	std::vector<Boid> boids;
-public:
-	Display();
-	Display(int amount);
+		// constructor
+		Display();
+		Display(int quantity);
 
-	void mainloop();
-	void draw();
+		void mainloop();
+		void draw();
 };
-
 #endif
