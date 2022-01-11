@@ -12,14 +12,18 @@ class Vector2D{
 		float y;
 
 	public:
+		// constructors
 		Vector2D();
 		Vector2D(float _x, float _y);
 
-
+		// get the distance between two vectors
 		float distance(Vector2D& v);
+		// get the magnitude of a vector
 		float magnitude();
+		// normalize a vector
 		void nomalize();
-		void limit(float max);
+		// limit the vector to the value provided
+		void limit(float val);
 
 		// calculate the angle of the Vector
 		float angle();
@@ -27,9 +31,8 @@ class Vector2D{
 		// getters and setters for the vector
 		float get_x();
 		float get_y();
-
-		void set_x(float _x);
-		void set_y(float _y);
+		void set_x(float val);
+		void set_y(float val);
 		void set(float _x, float _y);
 
 		// unary minus
@@ -40,10 +43,10 @@ class Vector2D{
 		// variable assignment for vectors
 		void operator = (Vector2D v);
 
-		// binary assingments for floats
+		// binary operators for floats
 		Vector2D operator *(float val);
 
-		// binary assignemts for vectors
+		// binary operators for vectors
 		Vector2D operator -(const Vector2D& v);
 		Vector2D operator +(const Vector2D& v);
 

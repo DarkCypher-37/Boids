@@ -39,7 +39,7 @@ Boid::Boid() {
 Boid::Boid(float _x, float _y) {
     // constructor with arguments for the postion
     position = Vector2D(_x, _y);
-    shape.setPointCount(3); // lowering the resolution of the circle so much, that it becomes a triangle
+    //shape.setPointCount(3); // lowering the resolution of the circle so much, that it becomes a triangle
     speed = Vector2D(rand() % 50 -25, rand() % 50 - 25); // randomizing the velocity of the Boid to make it more FUUUNNN!!!
     shape.setRadius(8.0f); // setting the readius of the circle
     shape.setFillColor(sf::Color(0, 255, 0)); // colering the 'circles' green
@@ -103,7 +103,7 @@ void Boid::update(std::vector<Boid>& boids) {
         seperation.nomalize();
 
         // adding the vectors to speed, adjust the floats for diffrent flocking behaviours
-        speed += alignment*1.f + cohesion*1.f + seperation*1.25f;
+        speed += alignment*1.f + cohesion*1.f + seperation*1.f;
 
         // normalizing the speedvector
         speed.nomalize();
