@@ -1,4 +1,5 @@
 #include "Display.hpp"
+#include <iostream>
 
 bool vector_in_bounds(sf::Vector2i mouse, Vector2D coords, Vector2D size) {
 	if (static_cast<float>(mouse.x) > coords.x && static_cast<float>(mouse.x) < coords.x+size.x &&
@@ -7,6 +8,13 @@ bool vector_in_bounds(sf::Vector2i mouse, Vector2D coords, Vector2D size) {
 		return true;
 	}
 	return false;
+}
+
+float add_but_keep_float_in_bounds(float val, float lower_bound, float upper_bound, float add) {
+	if (val + add < lower_bound || val + add > upper_bound) {
+		return val;
+	}
+	return val + add;
 }
 
 Display::Display() {
@@ -48,8 +56,8 @@ Display::Display() {
 Display::Display(int quantity) {
 	// getting the width and height of the screen
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-	width = desktop.width;
-	height = desktop.height;
+	width = floor(desktop.width);
+	height = floor(desktop.height);
 
 	// create the window
 	window.create(sf::VideoMode(width, height, desktop.bitsPerPixel), "Boids", sf::Style::None);
@@ -65,9 +73,14 @@ Display::Display(int quantity) {
 	alignmentWeight = 1.f;
 	cohesionWeight = 1.f;
 
+	sf::Color box_color = sf::Color(50, 50, 50);
+	sf::Color outline_color = sf::Color(100, 100, 100);
+
 	box_seperation.setPosition(sf::Vector2f(50.f, 50.f));
 	box_seperation.setSize(sf::Vector2f(50.f, 50.f));
-	box_seperation.setFillColor(sf::Color(50, 50, 50));
+	box_seperation.setFillColor(box_color);
+	box_seperation.setOutlineColor(outline_color);
+	box_seperation.setOutlineThickness(1.f);
 
 	seperation_text.setString("Seperation");
 	seperation_text.setFillColor(sf::Color(200, 200, 200));
@@ -76,11 +89,15 @@ Display::Display(int quantity) {
 
 	box_alignment.setPosition(sf::Vector2f(110.f, 50.f));
 	box_alignment.setSize(sf::Vector2f(50.f, 50.f));
-	box_alignment.setFillColor(sf::Color(50, 50, 50));
+	box_alignment.setFillColor(box_color);
+	box_alignment.setOutlineColor(outline_color);
+	box_alignment.setOutlineThickness(1.f);
 
 	box_cohesion.setPosition(sf::Vector2f(170.f, 50.f));
 	box_cohesion.setSize(sf::Vector2f(50.f, 50.f));
-	box_cohesion.setFillColor(sf::Color(50, 50, 50));
+	box_cohesion.setFillColor(box_color);
+	box_cohesion.setOutlineColor(outline_color);
+	box_cohesion.setOutlineThickness(1.f);
 
 }
 
@@ -122,14 +139,16 @@ void Display::mainloop() {
 			sf::Vector2i mouseCoords = sf::Mouse::getPosition(window);
 			if (vector_in_bounds(mouseCoords, Vector2D(50.f, 50.f), Vector2D(50.f, 50.f))) {
 				// on the first box
-				seperationWeight -= 0.01;
-				box_seperation.setFillColor(sf::Color());
+				seperationWeight = add_but_keep_float_in_bounds(seperationWeight, 0.f, 3.f, -0.01);
+				box_seperation.setFillColor(sf::Color(255/3*seperationWeight, 255 / 3 * seperationWeight, 255 / 3 * seperationWeight));
 			} else if (vector_in_bounds(mouseCoords, Vector2D(110.f, 50.f), Vector2D(50.f, 50.f))) {
 				// on the second box
-				alignmentWeight -= 0.01;
+				box_alignment.setFillColor(sf::Color(255 / 3 * alignmentWeight, 255 / 3 * alignmentWeight, 255 / 3 * alignmentWeight));
+				alignmentWeight = add_but_keep_float_in_bounds(alignmentWeight, 0.f, 3.f, -0.01);
 			} else if (vector_in_bounds(mouseCoords, Vector2D(170.f, 50.f), Vector2D(50.f, 50.f))) {
 				// on the third box
-				cohesionWeight -= 0.01;
+				box_cohesion.setFillColor(sf::Color(255 / 3 * cohesionWeight, 255 / 3 * cohesionWeight, 255 / 3 * cohesionWeight));
+				cohesionWeight = add_but_keep_float_in_bounds(cohesionWeight, 0.f, 3.f, -0.01);
 			} else {
 				Boid boid(static_cast<float>(mouseCoords.x), static_cast<float>(mouseCoords.y), sf::Color(255, 255, 0));
 				boids.push_back(boid);
@@ -141,15 +160,18 @@ void Display::mainloop() {
 			sf::Vector2i mouseCoords = sf::Mouse::getPosition(window);
 			if (vector_in_bounds(mouseCoords, Vector2D(50.f, 50.f), Vector2D(50.f, 50.f))) {
 				// on the first box
-				seperationWeight = std::abs(std::fmod(seperationWeight + 0.01, 3));
+				seperationWeight = add_but_keep_float_in_bounds(seperationWeight, 0.f, 3.f, 0.01);
+				box_seperation.setFillColor(sf::Color(255 / 3 * seperationWeight, 255 / 3 * seperationWeight, 255 / 3 * seperationWeight));
 			}
 			else if (vector_in_bounds(mouseCoords, Vector2D(110.f, 50.f), Vector2D(50.f, 50.f))) {
 				// on the second box
-				alignmentWeight = std::abs(std::fmod(alignmentWeight + 0.01, 3));
+				alignmentWeight = add_but_keep_float_in_bounds(alignmentWeight, 0.f, 3.f, 0.01);
+				box_alignment.setFillColor(sf::Color(255 / 3 * alignmentWeight, 255 / 3 * alignmentWeight, 255 / 3 * alignmentWeight));
 			}
 			else if (vector_in_bounds(mouseCoords, Vector2D(170.f, 50.f), Vector2D(50.f, 50.f))) {
 				// on the third box
-				cohesionWeight = std::abs(std::fmod(cohesionWeight + 0.01, 3));
+				cohesionWeight = add_but_keep_float_in_bounds(cohesionWeight, 0.f, 3.f, 0.01);
+				box_cohesion.setFillColor(sf::Color(255 / 3 * cohesionWeight, 255 / 3 * cohesionWeight, 255 / 3 * cohesionWeight));
 			}
 			else {
 				Boid boid(static_cast<float>(mouseCoords.x), static_cast<float>(mouseCoords.y), sf::Color(255, 255, 0));
@@ -164,6 +186,7 @@ void Display::mainloop() {
 		}
 
 		// draw the window
+		// std::									// FIXME
 		draw();
 	}
 }
